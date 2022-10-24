@@ -34,11 +34,32 @@ public class SearchPageAmazon {
         }
         List<Product> listProducts = new ArrayList<>();
         List<WebElement> products = driver.findElements(By.xpath("//div[@class='s-card-container s-overflow-hidden aok-relative puis-include-content-margin puis s-latency-cf-section s-card-border']"));
-        String productNameXpath = ".//span[(@class='a-size-medium a-color-base a-text-normal')]";
-        String priceXpath = ".//div[@class='a-section a-spacing-small a-spacing-top-small']//a[@class='a-size-base a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal']/span[1]/span[1]";
-        String linkXpath = ".//div[@class='a-section a-spacing-small a-spacing-top-small']//a[@class='a-size-base a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal']";
-        for (int i = 0; i < products.size(); i++) {
-//            title = "amazon.com";
+//        String productNameXpath = "//span[(@class='a-size-medium a-color-base a-text-normal')]";
+//        String priceXpath = "//div[@class='a-section a-spacing-small a-spacing-top-small']//a[@class='a-size-base a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal']/span[1]/span[1]";
+//        String linkXpath = "//div[@class='a-section a-spacing-small a-spacing-top-small']//a[@class='a-size-base a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal']";
+        for (int i=0;i< products.size();i++) {
+            title = "amazon.com";
+            String productNameXpath= "//div[@data-index="+(i+2)+"]//span[@class='a-size-medium a-color-base a-text-normal']";
+            List<WebElement> productNameList= driver.findElements(By.xpath(productNameXpath));
+            if(productNameList.size()>0){
+                productName=driver.findElement(By.xpath(productNameXpath)).getText();
+            }else{
+                productName="null";
+            }
+            String priceXpath="//div[@data-index="+(i+2)+"]//span[@class='a-price']//span[@class='a-offscreen']";
+            List<WebElement> priceList= driver.findElements(By.xpath(priceXpath));
+            if(priceList.size()>0){
+                price= Float.parseFloat(driver.findElement(By.xpath(priceXpath)).getAttribute("innerHTML").replace("$",""));
+            }else{
+                price=0;
+            }
+            String linkXpath= "//div[@data-index="+(i+2)+"]//a[@class='a-size-base a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal']";
+            List<WebElement> linkList= driver.findElements(By.xpath(priceXpath));
+            if(linkList.size()>0){
+                link=driver.findElement(By.xpath(linkXpath)).getAttribute("href");
+            }else{
+                link="null";
+            }
 //            List<WebElement> productNames= driver.findElements(By.xpath(productNameXpath));
 //            if(productNames.size()>0){
 //                productName=driver.findElement(By.xpath(productNameXpath)).getText();
@@ -59,24 +80,25 @@ public class SearchPageAmazon {
 //            }else{
 //                link="null";
 //            }
+//
+//            try {
+//                productName = driver.findElement(By.xpath(productNameXpath)).getText();
+//            } catch (NoSuchElementException e) {
+//                productName = "null";
+//            }
+//            try {
+//                price = Float.parseFloat(driver.findElement(By.xpath(priceXpath)).getAttribute("innerHTML").replace("$",""));
+//            } catch (NoSuchElementException e) {
+//                price = 0;
+//            }
+//            try {
+//                link = driver.findElement(By.xpath(linkXpath)).getAttribute("href");
+//            } catch (NoSuchElementException e) {
+//                link = "null";
+//            }
 
-            try {
-                productName = products.get(i).findElement(By.xpath(productNameXpath)).getText();
-            } catch (NoSuchElementException e) {
-                productName = "null";
-            }
-            try {
-                price = Float.parseFloat(products.get(i).findElement(By.xpath(priceXpath)).getAttribute("innerHTML").replace("$",""));
-            } catch (NoSuchElementException e) {
-                price = 0;
-            }
-            try {
-                link = products.get(i).findElement(By.xpath(linkXpath)).getAttribute("href");
-            } catch (NoSuchElementException e) {
-                link = "null";
-            }
-            Product product = new Product(title, productName, price, link);
-            listProducts.add(product);
+            Product newProduct = new Product(title, productName, price, link);
+            listProducts.add(newProduct);
 
         }
         return listProducts;
