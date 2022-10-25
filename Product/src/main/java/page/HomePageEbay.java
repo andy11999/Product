@@ -1,22 +1,28 @@
 package page;
 
+import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
-public class HomePageEbay {
-    public WebDriver driver;
+public class HomePageEbay extends BasePage {
+
 
     public HomePageEbay(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
-    public void getPage(){
-        driver.get("https://ebay.com");
+    String appURL="https://ebay.com";
+    public HomePageEbay getPage() {
+        driver.get(appURL);
+        return this;
     }
-    public void searchPage() {
-        driver.findElement(By.xpath("//input[@placeholder='Search for anything']")).sendKeys("iPhone 11");
-        driver.findElement(By.xpath("//input[@value='Search']")).click();
+    By searchTextBox = By.xpath("//input[@placeholder='Search for anything']");
+    By searchButton = By.xpath("//input[@value='Search']");
 
-
+    public SearchPageEbay goToSearchPage(){
+        writeText(searchTextBox,"iPhone 11");
+        click(searchButton);
+        return new SearchPageEbay(driver);
     }
+
 }

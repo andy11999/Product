@@ -1,19 +1,26 @@
 package page;
 
+import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
-public class HomePageAmazon {
-    public static WebDriver driver;
+public class HomePageAmazon extends BasePage {
     public HomePageAmazon(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
-    public void getPage(){
-        driver.get("https://amazon.com");
+    String appURL="https://amazon.com";
+    public HomePageAmazon getPage() {
+        driver.get(appURL);
+        return this;
     }
-    public void searchPage() {
-        driver.findElement(By.id("twotabsearchtextbox")).sendKeys("iPhone 11");
-        driver.findElement(By.id("nav-search-submit-button")).click();
+    By searchTextBox = By.id("twotabsearchtextbox");
+    By searchButton = By.id("nav-search-submit-button");
+
+    public SearchPageAmazon goToSearchPage(){
+        writeText(searchTextBox,"iPhone 11");
+        click(searchButton);
+        return  new SearchPageAmazon(driver);
     }
+
 }

@@ -1,5 +1,6 @@
 package page;
 
+import core.BasePage;
 import model.Product;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,18 +8,17 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
-public class SearchPageEbay {
+
+public class SearchPageEbay extends BasePage {
 
     String title = "";
     String productName = "";
     float price;
     String link = "";
-    public WebDriver driver;
 
     public SearchPageEbay(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public List<Product> extractData() {
@@ -27,13 +27,6 @@ public class SearchPageEbay {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        ArrayList<Product> listProduct = new ArrayList<>();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         List<Product> listProducts = new ArrayList<>();
         List<WebElement> products = driver.findElements(By.xpath("//div[@class='s-item__wrapper clearfix']"));
         String productNameXpath = ".//div[@class='s-item__title']";
@@ -43,7 +36,7 @@ public class SearchPageEbay {
             title="ebay.com";
             try {
                 productName = products.get(i).findElement(By.xpath(productNameXpath)).getText();
-            } catch (NoSuchElementException e) {
+            } catch (org.openqa.selenium.NoSuchElementException e) {
                 productName = "null";
             }
             try {
@@ -70,12 +63,12 @@ public class SearchPageEbay {
                     }
                 }
 
-            } catch (NoSuchElementException e) {
+            } catch (org.openqa.selenium.NoSuchElementException e) {
                 price = 0;
             }
             try {
                 link = products.get(i).findElement(By.xpath(linkXpath)).getAttribute("href");
-            } catch (NoSuchElementException e) {
+            } catch (org.openqa.selenium.NoSuchElementException e) {
                 link = "null";
             }
             Product product = new Product(title, productName, price, link);
