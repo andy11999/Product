@@ -13,7 +13,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static constant.Common.AMZ_URL;
+import static constant.Common.EBAY_URL;
+
 public class SearchIphoneTest extends BaseSetup {
+    private String key="iPhone 11";
 
     @Test
     public void searchData() {
@@ -21,23 +25,19 @@ public class SearchIphoneTest extends BaseSetup {
         SearchPageEbay searchPageEbay = new SearchPageEbay(driver);
         HomePageAmazon homePageAmazon = new HomePageAmazon(driver);
         HomePageEbay homePageEbay= new HomePageEbay(driver);
-        homePageAmazon.getPage();
-        homePageAmazon.goToSearchPage("iPhone 11");
-        List<Product> listProductAmazon = searchPageAmazon.extractData();
-        homePageEbay.getPage();
-        homePageEbay.goToSearchPage("iPhone 11");
-        List<Product> listProductEbay = searchPageEbay.extractData();
+        homePageAmazon.gotoUrl(AMZ_URL);
+        homePageAmazon.goToSearchPage(key);
+        List<Product> listProductAmazon = searchPageAmazon.extractData(key);
+        homePageEbay.gotoUrl(EBAY_URL);
+        homePageEbay.goToSearchPage(key);
+        List<Product> listProductEbay = searchPageEbay.extractData(key);
         listProductEbay.addAll(listProductAmazon);
         List<Product> sortedProduct = listProductEbay.stream()
                 .sorted(Comparator.comparing(Product::getPrice))
                 .collect(Collectors.toList());
-        for (int i = 0; i < sortedProduct.size(); i++) {
-            System.out.println(sortedProduct.get(i));
-            if (sortedProduct.get(i).getProductName().contains("iPhone 11")) {
-                System.out.println("Mention Product");
-            } else {
-                System.out.println("Does not mention product");
-            }
+        for (Product product: sortedProduct) {
+            System.out.println(product);
+
         }
 
 

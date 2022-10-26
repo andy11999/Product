@@ -21,7 +21,7 @@ public class SearchPageEbay extends BasePage {
         super(driver);
     }
 
-    public List<Product> extractData() {
+    public List<Product> extractData(String key) {
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -38,6 +38,9 @@ public class SearchPageEbay extends BasePage {
                 productName = products.get(i).findElement(By.xpath(productNameXpath)).getText();
             } catch (org.openqa.selenium.NoSuchElementException e) {
                 productName = "null";
+            }
+            if(!productName.contains(key)){
+                break;
             }
             try {
                 String priceInString = products.get(i).findElement(By.xpath(priceXpath)).getAttribute("innerHTML");

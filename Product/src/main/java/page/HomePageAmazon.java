@@ -9,11 +9,7 @@ public class HomePageAmazon extends BasePage {
     public HomePageAmazon(WebDriver driver) {
         super(driver);
     }
-    String appURL="https://amazon.com";
-    public HomePageAmazon getPage() {
-        driver.get(appURL);
-        return this;
-    }
+
     By searchTextBox = By.id("twotabsearchtextbox");
     By searchButton = By.id("nav-search-submit-button");
 

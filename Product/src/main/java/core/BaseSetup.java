@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 public class BaseSetup {
     public  WebDriver driver;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initChromeDriver(){
         WebDriverManager.chromedriver().setup();
 //        System.setProperty("webdriver.chrome.driver", "C:\\Users\\HP\\Downloads\\chromedriver_win32\\chromedriver.exe");
@@ -24,7 +24,7 @@ public class BaseSetup {
     }
 
 
-    @AfterClass
+    @AfterMethod(alwaysRun = true)
     public void tearDown() throws Exception {
         Thread.sleep(2000);
         driver.quit();

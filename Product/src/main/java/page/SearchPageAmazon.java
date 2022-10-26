@@ -18,7 +18,7 @@ public class SearchPageAmazon extends BasePage {
         super(driver);
     }
 
-    public List<Product> extractData() {
+    public List<Product> extractData(String key) {
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -36,6 +36,9 @@ public class SearchPageAmazon extends BasePage {
             } catch (org.openqa.selenium.NoSuchElementException e) {
                 productName = "null";
 
+            }
+            if(!productName.contains(key)){
+                break;
             }
             try {
                 price = Float.parseFloat(products.get(i).findElement(By.xpath(priceXpath)).getAttribute("innerHTML").replace("$","").replace(",",""));
