@@ -22,10 +22,10 @@ public class SearchIphoneTest extends BaseSetup {
         HomePageAmazon homePageAmazon = new HomePageAmazon(driver);
         HomePageEbay homePageEbay= new HomePageEbay(driver);
         homePageAmazon.getPage();
-        homePageAmazon.goToSearchPage();
+        homePageAmazon.goToSearchPage("iPhone 11");
         List<Product> listProductAmazon = searchPageAmazon.extractData();
         homePageEbay.getPage();
-        homePageEbay.goToSearchPage();
+        homePageEbay.goToSearchPage("iPhone 11");
         List<Product> listProductEbay = searchPageEbay.extractData();
         listProductEbay.addAll(listProductAmazon);
         List<Product> sortedProduct = listProductEbay.stream()

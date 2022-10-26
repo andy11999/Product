@@ -17,8 +17,8 @@ public class HomePageAmazon extends BasePage {
     By searchTextBox = By.id("twotabsearchtextbox");
     By searchButton = By.id("nav-search-submit-button");
 
-    public SearchPageAmazon goToSearchPage(){
-        writeText(searchTextBox,"iPhone 11");
+    public SearchPageAmazon goToSearchPage(String key){
+        writeText(searchTextBox,key);
         click(searchButton);
         return  new SearchPageAmazon(driver);
     }

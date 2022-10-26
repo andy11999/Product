@@ -19,8 +19,8 @@ public class HomePageEbay extends BasePage {
     By searchTextBox = By.xpath("//input[@placeholder='Search for anything']");
     By searchButton = By.xpath("//input[@value='Search']");
 
-    public SearchPageEbay goToSearchPage(){
-        writeText(searchTextBox,"iPhone 11");
+    public SearchPageEbay goToSearchPage(String key){
+        writeText(searchTextBox,key);
         click(searchButton);
         return new SearchPageEbay(driver);
     }

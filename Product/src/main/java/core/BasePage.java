@@ -2,10 +2,12 @@ package core;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class BasePage {
 
@@ -39,7 +41,15 @@ public class BasePage {
         waitVisibility(elementBy);
         driver.findElement(elementBy).sendKeys(text);
     }
-    
+
+    public WebElement getElement(By elementBy){
+        waitVisibility(elementBy);
+        return driver.findElement(elementBy);
+    }
+    public List<WebElement> getElements(By elementBy){
+        waitVisibility(elementBy);
+        return driver.findElements(elementBy);
+    }
 
 
 }

@@ -28,7 +28,7 @@ public class SearchPageEbay extends BasePage {
             e.printStackTrace();
         }
         List<Product> listProducts = new ArrayList<>();
-        List<WebElement> products = driver.findElements(By.xpath("//div[@class='s-item__wrapper clearfix']"));
+        List<WebElement> products = getElements(By.xpath("//div[@class='s-item__wrapper clearfix']"));
         String productNameXpath = ".//div[@class='s-item__title']";
         String priceXpath = ".//span[@class='s-item__price']";
         String linkXpath = ".//a[@class='s-item__link']";

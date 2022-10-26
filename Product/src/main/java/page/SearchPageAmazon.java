@@ -25,7 +25,7 @@ public class SearchPageAmazon extends BasePage {
             e.printStackTrace();
         }
         List<Product> listProducts = new ArrayList<>();
-        List<WebElement> products = driver.findElements(By.xpath("//div[@class='s-card-container s-overflow-hidden aok-relative puis-include-content-margin puis s-latency-cf-section s-card-border']"));
+        List<WebElement> products = getElements(By.xpath("//div[@class='s-card-container s-overflow-hidden aok-relative puis-include-content-margin puis s-latency-cf-section s-card-border']"));
         String productNameXpath = ".//span[(@class='a-size-medium a-color-base a-text-normal')]";
         String priceXpath = ".//div[@class='a-section a-spacing-small a-spacing-top-small']//a[@class='a-size-base a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal']/span[1]/span[1]";
         String linkXpath = ".//div[@class='a-section a-spacing-small a-spacing-top-small']//a[@class='a-size-base a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal']";
@@ -38,7 +38,7 @@ public class SearchPageAmazon extends BasePage {
 
             }
             try {
-                price = Float.parseFloat(products.get(i).findElement(By.xpath(priceXpath)).getAttribute("innerHTML").replace("$",""));
+                price = Float.parseFloat(products.get(i).findElement(By.xpath(priceXpath)).getAttribute("innerHTML").replace("$","").replace(",",""));
             } catch (org.openqa.selenium.NoSuchElementException  e) {
                 price = 0;
 
