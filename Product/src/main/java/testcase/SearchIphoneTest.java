@@ -3,6 +3,7 @@ package testcase;
 import core.BaseSetup;
 import model.Product;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import page.HomePageAmazon;
 import page.HomePageEbay;
@@ -15,6 +16,8 @@ import java.util.stream.Collectors;
 
 import static constant.Common.AMZ_URL;
 import static constant.Common.EBAY_URL;
+
+@Listeners(ListenerTest.class)
 
 public class SearchIphoneTest extends BaseSetup {
     private String key="iPhone 11";

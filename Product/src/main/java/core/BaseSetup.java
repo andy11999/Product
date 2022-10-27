@@ -24,11 +24,5 @@ public class BaseSetup {
     }
 
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() throws Exception {
-        Thread.sleep(2000);
-        driver.quit();
-    }
-
 
 }
