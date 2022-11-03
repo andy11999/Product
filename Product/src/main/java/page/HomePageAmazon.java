@@ -13,11 +13,22 @@ public class HomePageAmazon extends BasePage {
 
     }
 
-    By searchTextBox = By.id("twotabsearchtextbox");
-    By searchButton = By.id("nav-search-submit-button");
+//    By searchTextBox = By.id("twotabsearchtextbox");
+//    By searchButton = By.id("nav-search-submit-button");
+//
+//    public SearchPageAmazon goToSearchPage(String key){
+//        writeText(searchTextBox,key);
+//        click(searchButton);
+//        return new SearchPageAmazon(driver);
+//    }
+    @FindBy(id="twotabsearchtextbox")
+    WebElement searchTextbox;
+
+    @FindBy(id="nav-search-submit-button")
+    WebElement searchButton;
 
     public SearchPageAmazon goToSearchPage(String key){
-        writeText(searchTextBox,key);
+        writeText(searchTextbox,key);
         click(searchButton);
         return new SearchPageAmazon(driver);
     }

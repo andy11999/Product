@@ -3,6 +3,8 @@ package page;
 import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 
 public class HomePageEbay extends BasePage {
@@ -12,13 +14,26 @@ public class HomePageEbay extends BasePage {
         super(driver);
     }
 
-    By searchTextBox = By.xpath("//input[@placeholder='Search for anything']");
-    By searchButton = By.xpath("//input[@value='Search']");
+//    By searchTextBox = By.xpath("//input[@placeholder='Search for anything']");
+//    By searchButton = By.xpath("//input[@value='Search']");
+//
+//    public SearchPageEbay goToSearchPage(String key){
+//        writeText(searchTextBox,key);
+//        click(searchButton);
+//        return new SearchPageEbay(driver);
+//    }
+
+    @FindBy (xpath="//input[@placeholder='Search for anything']")
+    WebElement searchTextbox;
+
+    @FindBy (xpath="//input[@value='Search']")
+    WebElement searchButton;
 
     public SearchPageEbay goToSearchPage(String key){
-        writeText(searchTextBox,key);
+        writeText(searchTextbox,key);
         click(searchButton);
         return new SearchPageEbay(driver);
     }
+
 
 }
